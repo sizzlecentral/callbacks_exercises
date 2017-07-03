@@ -148,7 +148,15 @@ console.log( 'The total number of sales is:', numSales );
 /*
   Calculate the total number of 'purchases'.
 */
-var numPurchases;
+var numPurchases = 0;
+
+var filterPurchases = transactions.filter(isPurchase);
+
+function isPurchase(transaction) {
+  if (transaction.type === 'purchase') {
+    numPurchases++;
+  }
+}
 
 console.log( 'The total number of purchases is:', numPurchases );
 
@@ -162,7 +170,15 @@ console.log( 'The total number of purchases is:', numPurchases );
   HINT(S):
   - Don't forget that 'purchases' can also be made in 'cash'!
 */
-var numCashSales;
+var numCashSales = 0;
+
+var filterCashSales = transactions.filter(isCashSale);
+
+function isCashSale(transaction) {
+  if (transaction.paymentMethod === 'cash') {
+    numCashSales++;
+  }
+}
 
 console.log( 'The total number of cash sales is:', numCashSales );
 
