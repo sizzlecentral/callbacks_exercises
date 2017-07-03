@@ -242,7 +242,22 @@ console.log( 'The unique vendors are:', uniqueVendors );
   - The assembled array should be made up of strings, not full `transaction` objects.
   - Make sure that the resulting array *does not* include any duplicates.
 */
-var uniqueCustomers;
+var uniqueCustomers = [];
+var customers = [];
+
+transactions.filter(isCustomer);
+// customers.filter(isUnique);
+
+function isCustomer(transaction) {
+  if (transaction.customer != undefined) {
+    customers.push(transaction.customer);
+  }
+}
+
+// function isUnique(name) {
+//   // Need a way to iterate and compare the customers array
+//   // Push unique names to uniqueCustomers
+// }
 
 console.log( 'The unique customers are:', uniqueCustomers );
 
@@ -260,7 +275,19 @@ console.log( 'The unique customers are:', uniqueCustomers );
   - There may be more than 1 'sale' that includes 5 or more items.
   - Individual transactions do not have either `name` or `numItems` properties, we'll have to add them to the output.
 */
-var bigSpenders;
+var bigSpenders = [];
+custID = 0;
+
+transactions.filter(isBigSpender);
+
+function isBigSpender(transaction) {
+  if (transaction.items.length >= 5) {
+    custID++;
+    numItems = transaction.items.length + ' items';
+    custName = 'Big Spender ' + custID;
+    bigSpenders.push(custName, numItems);
+  }
+}
 
 console.log( 'The "big spenders" are:', bigSpenders );
 
