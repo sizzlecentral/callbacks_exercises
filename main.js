@@ -246,7 +246,7 @@ var uniqueCustomers = [];
 var customers = [];
 
 transactions.filter(isCustomer);
-// customers.filter(isUnique);
+customers.filter(isUnique);
 
 function isCustomer(transaction) {
   if (transaction.customer != undefined) {
@@ -254,10 +254,11 @@ function isCustomer(transaction) {
   }
 }
 
-// function isUnique(name) {
-//   // Need a way to iterate and compare the customers array
-//   // Push unique names to uniqueCustomers
-// }
+function isUnique(name, index, array) {
+  if (array.indexOf(name) === index) {
+    uniqueCustomers.push(name);
+  }
+}
 
 console.log( 'The unique customers are:', uniqueCustomers );
 
@@ -275,21 +276,21 @@ console.log( 'The unique customers are:', uniqueCustomers );
   - There may be more than 1 'sale' that includes 5 or more items.
   - Individual transactions do not have either `name` or `numItems` properties, we'll have to add them to the output.
 */
-var bigSpenders = [];
-custID = 0;
-
-transactions.filter(isBigSpender);
-
-function isBigSpender(transaction) {
-  if (transaction.items.length >= 5) {
-    custID++;
-    numItems = transaction.items.length + ' items';
-    custName = 'Big Spender ' + custID;
-    bigSpenders.push(custName, numItems);
-  }
-}
-
-console.log( 'The "big spenders" are:', bigSpenders );
+// var bigSpenders = [];
+// custID = 0;
+//
+// transactions.filter(isBigSpender);
+//
+// function isBigSpender(transaction) {
+//   if (transaction.items.length >= 5) {
+//     custID++;
+//     numItems = transaction.items.length + ' items';
+//     custName = 'Big Spender ' + custID;
+//     bigSpenders.push(custName, numItems);
+//   }
+// }
+//
+// console.log( 'The "big spenders" are:', bigSpenders );
 
 
 // --------------------------------------------------
@@ -301,9 +302,19 @@ console.log( 'The "big spenders" are:', bigSpenders );
   HINT(S):
   - Transactions don't have 'prices', but their 'items' do!
 */
-var sumSales;
-
-console.log( 'The sum of all sales is:', sumSales );
+// var sales = [];
+// var firstSale = sales.reduce();
+// var sumSales = '$' + firstSale;
+//
+// transactions.filter(isSale);
+//
+// function isSale(transaction) {
+//   if (transaction.type === 'sale') {
+//     sales.push(transaction.items.price);
+//   }
+// }
+//
+// console.log( 'The sum of all sales is:', sumSales );
 
 
 // --------------------------------------------------
