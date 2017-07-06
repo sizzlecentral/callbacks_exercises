@@ -330,8 +330,6 @@ console.log( 'The sum of all items in the first sale is: $', sumSales );
   - Make sure to include 'price' information from *all* purchases.
 */
 
-var sumPurchases;
-
 var sumPurchases = isPurchase(transactions).reduce(function(sum, value) {
   return sum + value;
 }, 0);
@@ -364,7 +362,40 @@ console.log( 'The sum of all purchases is: $', sumPurchases );
   HINT(S):
   - Unlike 'QUESTION 08' and 'QUESTION 09', here we're interested in both 'sale' and 'purchase' transactions.
 */
-var netProfit;
+
+var totalPurchases = isAPurchase(transactions).reduce(function(sum, value) {
+  return sum + value;
+}, 0);
+
+function isAPurchase(transactions) {
+  var purchases = [];
+  for (var b = 0; b < transactions.length; b++) {
+  if (transactions[b].type === 'purchase') {
+    for (var i = 0; i < transactions[b].items.length; i++) {
+      purchases.push(transactions[b].items[i].price);
+    }
+  }
+}
+  return purchases;
+}
+
+var totalSales = isASale(transactions).reduce(function(sum, value) {
+  return sum + value;
+}, 0);
+
+function isASale(transactions) {
+  var sales = [];
+  for (var b = 0; b < transactions.length; b++) {
+  if (transactions[b].type === 'sale') {
+    for (var i = 0; i < transactions[b].items.length; i++) {
+      sales.push(transactions[b].items[i].price);
+    }
+  }
+}
+  return sales;
+}
+
+var netProfit = totalSales + totalPurchases;
 
 console.log( 'The net profit is:', netProfit );
 
