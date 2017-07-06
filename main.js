@@ -276,21 +276,21 @@ console.log( 'The unique customers are:', uniqueCustomers );
   - There may be more than 1 'sale' that includes 5 or more items.
   - Individual transactions do not have either `name` or `numItems` properties, we'll have to add them to the output.
 */
-// var bigSpenders = [];
-// custID = 0;
-//
-// transactions.filter(isBigSpender);
-//
-// function isBigSpender(transaction) {
-//   if (transaction.items.length >= 5) {
-//     custID++;
-//     numItems = transaction.items.length + ' items';
-//     custName = 'Big Spender ' + custID;
-//     bigSpenders.push(custName, numItems);
-//   }
-// }
-//
-// console.log( 'The "big spenders" are:', bigSpenders );
+var bigSpenders = [];
+custID = 0;
+
+transactions.filter(isBigSpender);
+
+function isBigSpender(transaction) {
+  if (transaction.items.length >= 5) {
+    custID++;
+    numItems = transaction.items.length + ' items';
+    custName = 'Big Spender ' + custID;
+    bigSpenders.push(custName, numItems);
+  }
+}
+
+console.log( 'The "big spenders" are:', bigSpenders );
 
 
 // --------------------------------------------------
@@ -302,19 +302,21 @@ console.log( 'The unique customers are:', uniqueCustomers );
   HINT(S):
   - Transactions don't have 'prices', but their 'items' do!
 */
-// var sales = [];
-// var firstSale = sales.reduce();
-// var sumSales = '$' + firstSale;
-//
-// transactions.filter(isSale);
-//
-// function isSale(transaction) {
-//   if (transaction.type === 'sale') {
-//     sales.push(transaction.items.price);
-//   }
-// }
-//
-// console.log( 'The sum of all sales is:', sumSales );
+
+var allSales = transactions.filter(isSale);
+var items = allSales[0]['items'];
+
+var sumSales = items.reduce(function(sum, item) {
+  return sum + item['price'];
+}, 0);
+
+function isSale(transaction) {
+  if (transaction.type === 'sale') {
+    return true;
+  }
+}
+
+console.log( 'The sum of all items in the first sale is: $', sumSales );
 
 
 // --------------------------------------------------
@@ -330,7 +332,23 @@ console.log( 'The unique customers are:', uniqueCustomers );
 
 var sumPurchases;
 
-console.log( 'The sum of all purchases is:', sumPurchases );
+var sumPurchases = isPurchase(transactions).reduce(function(sum, value) {
+  return sum + value;
+}, 0);
+
+function isPurchase(transactions) {
+  var purchases = [];
+  for (var b = 0; b < transactions.length; b++) {
+  if (transactions[b].type === 'purchase') {
+    for (var i = 0; i < transactions[b].items.length; i++) {
+      purchases.push(transactions[b].items[i].price);
+    }
+  }
+}
+  return purchases;
+}
+
+console.log( 'The sum of all purchases is: $', sumPurchases );
 
 
 // --------------------------------------------------
